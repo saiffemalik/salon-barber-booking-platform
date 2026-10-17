@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { connectDB } from "@/lib/db";
 import Booking from "@/models/Booking";
 import Service from "@/models/Service";
+import "@/models/User";
 
 const dateSchema = z
   .string()
