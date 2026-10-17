@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Schibsted_Grotesk } from "next/font/google";
+import SalonMap from "@/components/SalonMap";
+
+const salonAddress = "Apartment 3, New Grange Hall, Hawthorn Avenue, Kilcarbery, Dublin 22, D22 P9R2";
 
 const font = Schibsted_Grotesk({
   subsets: ["latin"],
@@ -405,6 +408,7 @@ export default function DashboardPage() {
           </ul>
         ) : null}
       </div>
+      <SalonMap address={salonAddress} />
     </main>
   );
 }

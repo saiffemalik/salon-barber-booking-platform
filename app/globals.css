@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,28 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.salon-map-marker {
+  border: 0;
+  background: transparent;
+}
+
+.salon-map-marker span {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid white;
+  border-radius: 50% 50% 50% 0;
+  background: #b8322a;
+  box-shadow: 0 1px 5px rgb(23 33 43 / 40%);
+  transform: rotate(-45deg);
+}
+
+#salon-map .leaflet-container {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
