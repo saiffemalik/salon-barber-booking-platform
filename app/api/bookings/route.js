@@ -49,6 +49,7 @@ export async function GET() {
     const bookings = await Booking.find(filter)
       .sort({ date: 1, time: 1 })
       .populate("service", "name")
+      .populate("user", "name email")
       .lean();
 
     return Response.json({ bookings });
