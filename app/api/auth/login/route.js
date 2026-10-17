@@ -4,6 +4,11 @@ import { connectDB } from "@/lib/db";
 import { setAuthCookie, signToken } from "@/lib/auth";
 import User from "@/models/User";
 
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_ATTEMPTS = 5;
+const MAX_RATE_LIMIT_ENTRIES = 10_000;
+const attemptsByIp = new Map();
+
 const loginSchema = z.object({
   email: z.email().trim().toLowerCase(),
   password: z
@@ -14,7 +19,58 @@ const loginSchema = z.object({
     }),
 });
 
+function getClientIp(request) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  const forwardedIp = forwardedFor?.split(",")[0]?.trim();
+  return forwardedIp || request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  let entry = attemptsByIp.get(ip);
+
+  if (!entry || now - entry.windowStartedAt >= RATE_LIMIT_WINDOW_MS) {
+    entry = { count: 0, windowStartedAt: now };
+    attemptsByIp.set(ip, entry);
+  }
+
+  entry.count += 1;
+
+  if (attemptsByIp.size > MAX_RATE_LIMIT_ENTRIES) {
+    for (const [key, value] of attemptsByIp) {
+      if (now - value.windowStartedAt >= RATE_LIMIT_WINDOW_MS) {
+        attemptsByIp.delete(key);
+      }
+    }
+    if (attemptsByIp.size > MAX_RATE_LIMIT_ENTRIES) {
+      const oldestKey = attemptsByIp.keys().next().value;
+      if (oldestKey !== undefined) attemptsByIp.delete(oldestKey);
+    }
+  }
+
+  return {
+    allowed: entry.count <= RATE_LIMIT_MAX_ATTEMPTS,
+    retryAfter: Math.max(
+      1,
+      Math.ceil((entry.windowStartedAt + RATE_LIMIT_WINDOW_MS - now) / 1000),
+    ),
+  };
+}
+
 export async function POST(request) {
+  const ip = getClientIp(request);
+  const rateLimit = checkRateLimit(ip);
+
+  if (!rateLimit.allowed) {
+    return Response.json(
+      { error: "Too many login attempts. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfter) },
+      },
+    );
+  }
+
   let body;
   try {
     body = await request.json();
