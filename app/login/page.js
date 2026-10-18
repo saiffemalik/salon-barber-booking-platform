@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -43,23 +44,35 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex flex-1 items-center justify-center bg-[#f5f3ee] px-4 py-12 sm:px-6">
-      <section className="w-full max-w-md rounded-3xl border border-stone-200 bg-white p-6 shadow-sm sm:p-9">
-        <div className="mb-8">
-          <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-amber-800">
-            Welcome back
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight text-stone-900">
+    <main
+      className="relative isolate flex flex-1 flex-col items-center justify-center bg-slate-900 bg-cover bg-center px-4 py-12 sm:px-6"
+      style={{ backgroundImage: "url('/barbershop-background.jpg')" }}
+    >
+      <div className="absolute inset-0 -z-10 bg-[#171411]/55" aria-hidden="true" />
+      <div className="mb-6 flex items-center gap-3 text-white">
+        <Image
+          src="/barber-shop.png"
+          alt=""
+          width={44}
+          height={44}
+          className="h-11 w-11 rounded-md bg-white object-contain p-0.5"
+        />
+        <span className="text-xl font-semibold tracking-tight">Old Town Barbers</span>
+      </div>
+
+      <section className="w-full max-w-md rounded-lg border border-[#b89a72]/40 bg-[#211d19]/90 p-6 shadow-2xl shadow-black/40 backdrop-blur-md sm:p-8">
+        <div className="mb-7 text-center">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
             Log in to your account
           </h1>
-          <p className="mt-3 text-sm leading-6 text-stone-600">
+          <p className="mt-2 text-sm leading-6 text-[#d6caba]">
             Sign in to manage your appointments and bookings.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5" aria-busy={pending}>
           <div>
-            <label htmlFor="email" className="mb-2 block text-sm font-semibold text-stone-800">
+            <label htmlFor="email" className="mb-2 block text-sm font-medium text-white">
               Email address
             </label>
             <input
@@ -69,13 +82,13 @@ export default function LoginPage() {
               autoComplete="email"
               required
               maxLength={254}
-              className="min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 text-base text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-amber-800 focus:ring-2 focus:ring-amber-800/20"
+              className="min-h-12 w-full rounded-md border border-[#655747] bg-[#332c24] px-4 text-base text-[#fffaf2] outline-none transition placeholder:text-[#b7a994] focus:border-[#d19a58] focus:ring-2 focus:ring-[#d19a58]/30"
               placeholder="you@example.com"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="mb-2 block text-sm font-semibold text-stone-800">
+            <label htmlFor="password" className="mb-2 block text-sm font-medium text-white">
               Password
             </label>
             <div className="relative">
@@ -85,14 +98,14 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 required
-                className="min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 pr-12 text-base text-stone-900 outline-none transition focus:border-amber-800 focus:ring-2 focus:ring-amber-800/20"
+                className="min-h-12 w-full rounded-md border border-[#655747] bg-[#332c24] px-4 pr-12 text-base text-[#fffaf2] outline-none transition placeholder:text-[#b7a994] focus:border-[#d19a58] focus:ring-2 focus:ring-[#d19a58]/30"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((visible) => !visible)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
                 aria-pressed={showPassword}
-                className="absolute inset-y-0 right-0 inline-flex w-12 items-center justify-center rounded-r-xl text-stone-500 transition hover:text-stone-900 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-amber-800"
+                className="absolute inset-y-0 right-0 inline-flex w-12 items-center justify-center rounded-r-md text-[#d6caba] transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-[#d19a58]"
               >
                 <svg
                   aria-hidden="true"
@@ -126,7 +139,7 @@ export default function LoginPage() {
             id="form-message"
             role={error ? "alert" : "status"}
             aria-live={error ? "assertive" : "polite"}
-            className={`min-h-5 text-sm ${error ? "text-red-700" : "text-stone-500"}`}
+            className={`min-h-5 text-sm ${error ? "text-red-300" : "text-[#d6caba]"}`}
           >
             {error || (pending ? "Signing you in..." : "")}
           </p>
@@ -134,17 +147,17 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={pending}
-            className="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-stone-900 px-5 text-base font-semibold text-white transition hover:bg-stone-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900 disabled:cursor-wait disabled:opacity-60"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-md bg-[#b8793e] px-5 text-sm font-semibold text-white transition hover:bg-[#a56832] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e0ad70] disabled:cursor-wait disabled:opacity-60"
           >
             {pending ? "Logging in..." : "Log in"}
           </button>
         </form>
 
-        <p className="mt-7 text-center text-sm text-stone-600">
+        <p className="mt-6 text-center text-sm text-[#d6caba]">
           New here?{" "}
           <Link
             href="/register"
-            className="font-semibold text-amber-900 underline decoration-amber-900/40 underline-offset-4 hover:decoration-amber-900 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800"
+            className="font-medium text-[#e0ad70] underline decoration-[#e0ad70]/50 underline-offset-4 hover:text-[#f0c58f] hover:decoration-[#f0c58f] focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#e0ad70]"
           >
             Create an account
           </Link>
