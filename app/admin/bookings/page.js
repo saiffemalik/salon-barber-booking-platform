@@ -2,12 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Schibsted_Grotesk } from "next/font/google";
-
-const font = Schibsted_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const statuses = ["pending", "confirmed", "cancelled"];
 
@@ -107,7 +101,7 @@ export default function AdminBookingsPage() {
   }
 
   return (
-    <main className={`${font.className} flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16`}>
+    <main className="flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>

@@ -2,12 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Schibsted_Grotesk } from "next/font/google";
-
-const font = Schibsted_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const fieldClass =
   "min-h-11 w-full rounded-md border border-[#b4b9b0] bg-white px-3 text-base text-[#17212b] outline-none transition-colors focus:border-[#17212b] focus-visible:ring-2 focus-visible:ring-[#17212b]/25 disabled:cursor-not-allowed disabled:bg-[#eef0eb]";
@@ -145,7 +139,7 @@ export default function AdminServicesPage() {
   }
 
   return (
-    <main className={`${font.className} flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16`}>
+    <main className="flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16">
       <div className="mx-auto max-w-5xl">
         <div className="flex flex-wrap items-end justify-between gap-5">
           <div>

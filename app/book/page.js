@@ -1,12 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Schibsted_Grotesk } from "next/font/google";
-
-const font = Schibsted_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 const money = new Intl.NumberFormat("en-IE", { style: "currency", currency: "EUR" });
 
@@ -136,7 +130,7 @@ export default function BookPage() {
 
   return (
     <main
-      className={`${font.className} flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16`}
+      className="flex-1 bg-[#e8eae4] px-4 py-10 text-[#17212b] sm:px-8 lg:py-16"
     >
       <form
         onSubmit={handleSubmit}

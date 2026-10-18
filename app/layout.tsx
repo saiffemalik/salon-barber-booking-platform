@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Libre_Baskerville } from "next/font/google";
 import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
+
+const bodyFont = Libre_Baskerville({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-libre-baskerville",
+});
+
+const headingFont = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cormorant-garamond",
+});
 
 export const metadata: Metadata = {
   title: "Old Town Barbers",
@@ -14,7 +27,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html
+      lang="en"
+      className={`${bodyFont.variable} ${headingFont.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <Suspense
           fallback={
