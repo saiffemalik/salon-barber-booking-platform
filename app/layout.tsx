@@ -4,8 +4,12 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Salon & Barber Booking",
-  description: "Book salon and barber appointments online",
+  title: "Old Town Barbers",
+  description: "Book salon and barber appointments online at Old Town Barbers.",
+  icons: {
+    icon: "/barber-shop.png",
+    apple: "/barber-shop.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

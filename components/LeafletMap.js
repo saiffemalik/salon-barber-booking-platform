@@ -32,12 +32,12 @@ export default function LeafletMap({ location }) {
 
     const popupContent = document.createElement("div");
     const salonName = document.createElement("strong");
-    salonName.textContent = "The Groom Room";
+    salonName.textContent = "Old Town Barbers";
     const address = document.createElement("p");
     address.textContent = location.displayName;
     popupContent.append(salonName, address);
 
-    L.marker(position, { icon: salonIcon, title: "The Groom Room" })
+    L.marker(position, { icon: salonIcon, title: "Old Town Barbers" })
       .addTo(map)
       .bindPopup(popupContent);
 

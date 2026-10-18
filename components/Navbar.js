@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getCurrentUser } from "@/lib/auth";
 import LogoutButton from "@/components/LogoutButton";
 
@@ -13,9 +14,17 @@ export default async function Navbar() {
       >
         <Link
           href="/"
-          className="rounded text-lg font-bold tracking-tight text-stone-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800"
+          className="inline-flex items-center gap-2 rounded text-lg font-bold tracking-tight text-stone-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-800"
         >
-          The Groom Room
+          <Image
+            src="/barber-shop.png"
+            alt=""
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 rounded-sm object-contain"
+          />
+          Old Town Barbers
         </Link>
 
         <div className="flex flex-wrap items-center justify-end gap-2 sm:gap-4">

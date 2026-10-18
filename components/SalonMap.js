@@ -59,7 +59,7 @@ export default function SalonMap({ address }) {
           Find us
         </p>
         <h2 id="salon-location-heading" className="mt-1 text-2xl font-semibold">
-          The Groom Room
+          Old Town Barbers
         </h2>
         <p className="mt-2 text-sm leading-6 text-[#4d5862]">{address}</p>
       </div>
